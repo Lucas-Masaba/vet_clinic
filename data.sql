@@ -10,3 +10,24 @@ INSERT INTO animals (name, date_of_birth, escape_attempts, neutered, weight_kg) 
 INSERT INTO animals (name, date_of_birth, escape_attempts, neutered, weight_kg) VALUES ('Angemon', '2005-06-12', 1, true, -45);
 INSERT INTO animals (name, date_of_birth, escape_attempts, neutered, weight_kg) VALUES ('Boarmon', '2005-06-07', 7, true, 20.4);
 INSERT INTO animals (name, date_of_birth, escape_attempts, neutered, weight_kg) VALUES ('Blossom', '1998-10-13', 3, true, 17);
+
+ALTER TABLE animals ADD species TEXT;
+
+BEGIN;
+UPDATE animals SET species = 'unspecified';
+ROLLBACK;
+UPDATE animals SET species = 'digimon' WHERE name LIKE '%\mon';
+UPDATE animals SET species = 'pokemon' WHERE name NOT LIKE '%\mon';
+COMMIT;
+
+BEGIN;
+DELETE * FROM animals;
+ROLLBACK;
+
+BEGIN;
+DELETE FROM animals WHERE date_of_birth > '2022-01-01';
+SAVEPOINT sp1;
+UPDATE animals SET weight_kg = weight_kg * -1;
+ROLLBACK TO sp1;
+UPDATE animals SET weight_kg = weight_kg * -1 WHERE weight_kg < 0;
+COMMIT;
