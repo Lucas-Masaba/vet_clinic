@@ -24,7 +24,7 @@ SELECT species FROM animals;
 COMMIT;
 
 BEGIN;
-DELETE * FROM animals;
+DELETE FROM animals;
 ROLLBACK;
 SELECT species FROM animals;
 
