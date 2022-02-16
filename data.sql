@@ -15,19 +15,28 @@ ALTER TABLE animals ADD species TEXT;
 
 BEGIN;
 UPDATE animals SET species = 'unspecified';
+SELECT species FROM animals;
 ROLLBACK;
+SELECT species FROM animals;
 UPDATE animals SET species = 'digimon' WHERE name LIKE '%\mon';
 UPDATE animals SET species = 'pokemon' WHERE name NOT LIKE '%\mon';
+SELECT species FROM animals;
 COMMIT;
 
 BEGIN;
 DELETE * FROM animals;
 ROLLBACK;
+SELECT species FROM animals;
+
 
 BEGIN;
 DELETE FROM animals WHERE date_of_birth > '2022-01-01';
 SAVEPOINT sp1;
 UPDATE animals SET weight_kg = weight_kg * -1;
+SELECT weight_kg FROM animals;
 ROLLBACK TO sp1;
+SELECT weight_kg FROM animals;
 UPDATE animals SET weight_kg = weight_kg * -1 WHERE weight_kg < 0;
+SELECT weight_kg FROM animals;
 COMMIT;
+SELECT weight_kg FROM animals;
