@@ -8,3 +8,14 @@ CREATE TABLE animals (
    neutered        BOOLEAN                                          NOT NULL,
    weight_kg       DECIMAL                                          NOT NULL
 );
+
+CREATE TABLE owners (
+   id        INT GENERATED ALWAYS AS IDENTITY NOT NULL PRIMARY KEY,
+   full_name TEXT                                         NOT NULL,
+   age       INT                                          NOT NULL
+);
+
+CREATE TABLE species (
+   id        INT GENERATED ALWAYS AS IDENTITY NOT NULL PRIMARY KEY,
+   name      TEXT                                         NOT NULL
+);
