@@ -11,8 +11,6 @@ INSERT INTO animals (name, date_of_birth, escape_attempts, neutered, weight_kg) 
 INSERT INTO animals (name, date_of_birth, escape_attempts, neutered, weight_kg) VALUES ('Boarmon', '2005-06-07', 7, true, 20.4);
 INSERT INTO animals (name, date_of_birth, escape_attempts, neutered, weight_kg) VALUES ('Blossom', '1998-10-13', 3, true, 17);
 
-ALTER TABLE animals ADD species TEXT;
-
 BEGIN;
 UPDATE animals SET species = 'unspecified';
 SELECT species FROM animals;
@@ -40,12 +38,6 @@ UPDATE animals SET weight_kg = weight_kg * -1 WHERE weight_kg < 0;
 SELECT weight_kg FROM animals;
 COMMIT;
 SELECT weight_kg FROM animals;
-
-ALTER TABLE animals ADD species_id INT;
-ALTER TABLE animals ADD CONSTRAINT speicies_id_fk FOREIGN KEY (species_id) REFERENCES species(id);
-
-ALTER TABLE animals ADD owner_id INT;
-ALTER TABLE animals ADD CONSTRAINT owner_fk FOREIGN KEY (owner_id) REFERENCES owners;
 
 INSERT INTO owners (full_name, age) VALUES ('SAM SMITH', 34);
 INSERT INTO owners (full_name, age) VALUES ('Jennifer Orwell', 19);
