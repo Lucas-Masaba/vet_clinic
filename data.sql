@@ -41,6 +41,7 @@ SELECT weight_kg FROM animals;
 COMMIT;
 SELECT weight_kg FROM animals;
 
+ALTER TABLE animals ADD species_id INT;
 ALTER TABLE animals ADD CONSTRAINT speicies_id_fk FOREIGN KEY (species_id) REFERENCES species(id);
 
 ALTER TABLE animals ADD owner_id INT;
