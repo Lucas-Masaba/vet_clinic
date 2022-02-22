@@ -1,5 +1,9 @@
 # Vet Clinic
 
+## Schema Diagram for database
+
+![screenshot](./schema_diagram.png)
+
 ## Built With
 
 - PostgreSQL
