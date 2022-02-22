@@ -34,7 +34,7 @@ CREATE TABLE invoice_items (
      total_price     DECIMAL                                      NOT NULL,
      invoice_id        INT                                      NOT NULL,
      treatment_id      INT                                      NOT NULL,
-     FOREIGN KEY (invoice_id) REFERENCES invoices(id) ON DELETE RESTRICT ON UPDATE CASCADE
+     FOREIGN KEY (invoice_id) REFERENCES invoices(id) ON DELETE RESTRICT ON UPDATE CASCADE,
      FOREIGN KEY (treatment_id) REFERENCES treatments(id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
@@ -42,7 +42,7 @@ CREATE TABLE medical_histories_treatments (
      id              INT GENERATED ALWAYS AS IDENTITY NOT NULL     PRIMARY KEY,
      medical_history_id        INT                                      NOT NULL,
      treatment_id      INT                                      NOT NULL,
-     FOREIGN KEY (medical_history_id) REFERENCES medical_histories(id) ON DELETE RESTRICT ON UPDATE CASCADE
+     FOREIGN KEY (medical_history_id) REFERENCES medical_histories(id) ON DELETE RESTRICT ON UPDATE CASCADE,
      FOREIGN KEY (treatment_id) REFERENCES treatments(id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
