@@ -5,16 +5,45 @@ CREATE TABLE patients (
 )
 
 CREATE TABLE treatments (
-     id              INT                                  NOT NULL PRIMARY KEY,
+     id              INT GENERATED ALWAYS AS IDENTITY NOT NULL     PRIMARY KEY,
      type            VARCHAR(50)                                      NOT NULL,
      name            VARCHAR(50)                                      NOT NULL
 )
 
 CREATE TABLE medical_histories (
-     id              INT                                  NOT NULL PRIMARY KEY,
+     id              INT GENERATED ALWAYS AS IDENTITY NOT NULL     PRIMARY KEY,
      admited_at      TIMESTAMP                                        NOT NULL,
-     patient_id      INT                                  NOT NULL PRIMARY KEY,
-     status          VARCHAR(50)                                      NOT NULL
+     patient_id      INT                                              NOT NULL,
+     status          VARCHAR(50)                                      NOT NULL,
+     FOREIGN KEY (patient_id) REFERENCES patients(id) ON DELETE RESTRICT ON UPDATE CASCADE
 )
 
-ALTER TABLE medical_histories ADD CONSTRAINT patient_id_fk FOREIGN KEY (patient_id) REFERENCES patients(id);
+CREATE TABLE invoices (
+     id              INT GENERATED ALWAYS AS IDENTITY NOT NULL     PRIMARY KEY,
+     total_amount    DECIMAL                                        NOT NULL,
+     generated_at    TIMESTAMP                                      NOT NULL,
+     payed_at        TIMESTAMP                                      NOT NULL,
+     medical_history_id        INT                                      NOT NULL,
+     FOREIGN KEY (medical_history_id) REFERENCES medical_histories(id) ON DELETE RESTRICT ON UPDATE CASCADE
+)
+
+CREATE TABLE invoice_items (
+     id              INT GENERATED ALWAYS AS IDENTITY NOT NULL     PRIMARY KEY,
+     unit_price      DECIMAL                                        NOT NULL,
+     quantity        INT                                      NOT NULL,
+     total_price     DECIMAL                                      NOT NULL,
+     invoice_id        INT                                      NOT NULL,
+     treatment_id      INT                                      NOT NULL,
+     FOREIGN KEY (invoice_id) REFERENCES invoices(id) ON DELETE RESTRICT ON UPDATE CASCADE
+     FOREIGN KEY (treatment_id) REFERENCES treatments(id) ON DELETE RESTRICT ON UPDATE CASCADE
+)
+
+CREATE TABLE medical_histories_treatments (
+     id              INT GENERATED ALWAYS AS IDENTITY NOT NULL     PRIMARY KEY,
+     medical_history_id        INT                                      NOT NULL,
+     treatment_id      INT                                      NOT NULL,
+     FOREIGN KEY (medical_history_id) REFERENCES medical_histories(id) ON DELETE RESTRICT ON UPDATE CASCADE
+     FOREIGN KEY (treatment_id) REFERENCES treatments(id) ON DELETE RESTRICT ON UPDATE CASCADE
+)
+
+
