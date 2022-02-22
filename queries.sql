@@ -27,7 +27,6 @@ SELECT visits.animals_name, vets.id, MAX(visits.date_of_visit) FROM visits JOIN 
 SELECT vets.name, COUNT(DISTINCT visits.animals_name) FROM vets JOIN visits ON visits.vets_id = vets.id WHERE vets.name = 'Stephanie Mendez' AND vets_id = 3 GROUP BY vets.name;
 SELECT vets.name, specializations.vets_id, specializations.species_id FROM vets JOIN specializations ON specializations.vets_id = vets.id GROUP BY vets.name, specializations.vets_id, specializations.species_id;
 SELECT visits.animals_name FROM vets JOIN visits ON visits.vets_id = vets.id WHERE vets.name = 'Stephanie Mendez' AND vets_id = 3 AND visits.date_of_visit BETWEEN '2020-04-01' and '2020-08-30' GROUP BY visits.animals_name;
-SELECT visits.animals_name, COUNT(visits.animals_name) FROM visits GROUP BY visits.animals_id ORDER BY `value_occurrence` DESC LIMIT 1;
 SELECT visits.animals_name, COUNT(visits.animals_name) FROM visits GROUP BY visits.animals_name ORDER BY COUNT(visits.animals_name) DESC LIMIT 1;
 SELECT visits.animals_name, vets.id, MIN(visits.date_of_visit) FROM visits JOIN vets ON vets.id = visits.vets_id WHERE vets.name = 'Maisy Smith' GROUP BY visits.animals_name, vets.id, visits.date_of_visit ORDER BY MIN(visits.date_of_visit) ASC LIMIT 1;
 SELECT * FROM animals  JOIN visits ON animals.id = visits.animals_id  JOIN vets ON vets.id = visits.vets_id  ORDER BY visits.date_of_visit DESC  LIMIT 1;
